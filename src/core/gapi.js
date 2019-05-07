@@ -36,7 +36,8 @@ function _formatUser (guser) {
     firstname: profile.getGivenName(),
     lastname: profile.getFamilyName(),
     image: profile.getImageUrl(),
-    email: profile.getEmail()
+    email: profile.getEmail(),
+    idtoken: guser.getAuthResponse().id_token
   }
 }
 
@@ -147,14 +148,10 @@ export default class GAPI {
   signIn () {
     return this._libraryInit('auth2')
       .then(auth => {
-        if (auth.isSignedIn.get()) {
-          return Promise.resolve(_formatUser(auth.currentUser.get()))
-        } else {
-          return auth.signIn()
-            .then(guser => {
-              return Promise.resolve(_formatUser(guser))
-            })
-        }
+        return auth.signIn({ prompt: 'select_account' })
+          .then(guser => {
+            return Promise.resolve(_formatUser(guser))
+          })
       })
   }
 
