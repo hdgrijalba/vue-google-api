@@ -31,6 +31,9 @@ export default {
         .then(() => {
           this.$emit('input', undefined)
         })
+    },
+    firstLoad () {
+      this.$gapi.firstLoad()
     }
   }
 }
