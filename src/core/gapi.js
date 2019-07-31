@@ -103,7 +103,6 @@ export default class GAPI {
       })
   }
 
-
   /** Initialize a gapi library object with config before each API call.
    *  Return the library object through a Promise. */
   _libraryInit (lib, config = {}) {
@@ -154,10 +153,6 @@ export default class GAPI {
             return Promise.resolve(_formatUser(guser))
           })
       })
-  }
-
-  firstLoad () {
-    gapi.load('auth2', function() {});
   }
 
   /** Disconnects the current user */

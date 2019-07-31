@@ -31,10 +31,10 @@ export default {
         .then(() => {
           this.$emit('input', undefined)
         })
-    },
-    firstLoad () {
-      this.$gapi.firstLoad()
     }
+  },
+  mounted () {
+    this.$gapi.load('auth2', function() {});
   }
 }
 </script>
